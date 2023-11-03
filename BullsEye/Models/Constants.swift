@@ -17,4 +17,12 @@ enum Constants {
     public static let roundRectCornerRadius = CGFloat(21.0)
     
   }
+  
+  enum LeaderBoard {
+    public static let leaderboardScoreColWidth = CGFloat(50.0)
+    public static let leaderboardDateColWidth = CGFloat(170.0)
+    public static let leaderboardMaxRowWidth = CGFloat(480.0)
+  }
 }
+
+

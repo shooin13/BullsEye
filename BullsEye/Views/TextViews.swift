@@ -39,7 +39,7 @@ struct SliderLabelText: View {
 struct LabelText: View {
   var label: String
   var body: some View {
-    Text(label.uppercased())
+    Text(label)
       .font(.caption)
       .bold()
       .kerning(1.5)
@@ -76,6 +76,41 @@ struct ButtonText: View {
   }
 }
 
+struct ScoreTextView: View {
+  var score: Int
+  var body: some View {
+    Text(String(score))
+      .fontWeight(.bold)
+      .multilineTextAlignment(.center)
+      .font(.title3)
+      .kerning(-0.2)
+      .foregroundColor(Color("TextColor"))
+  }
+}
+
+struct DateTextView: View {
+  var date: Date
+  var body: some View {
+    Text(date, style: .time)
+      .fontWeight(.bold)
+      .multilineTextAlignment(.center)
+      .font(.title3)
+      .kerning(-0.2)
+      .foregroundColor(Color("TextColor"))
+  }
+}
+
+struct BigBoldText: View {
+  let text: String
+  var body: some View {
+    Text(text.uppercased())
+      .fontWeight(.black)
+      .font(.title)
+      .kerning(2.0)
+      .foregroundStyle(Color("TextColor"))
+  }
+}
+
 struct TextViews_Preview: PreviewProvider {
   static var previews: some View {
     VStack {
@@ -85,6 +120,9 @@ struct TextViews_Preview: PreviewProvider {
       LabelText(label: "Очки")
       BodyText(text: "Вы набрали 200 баллов\n🎉🎉🎉")
       ButtonText(text: "Новый раунд")
+      ScoreTextView(score: 459)
+      DateTextView(date: Date())
+      BigBoldText(text: "Топ игроков")
     }
     .padding()
   }
