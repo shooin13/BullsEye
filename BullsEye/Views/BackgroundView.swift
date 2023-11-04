@@ -22,6 +22,8 @@ struct TopView: View {
   
   @Binding var game: Game
   
+  @State private var leaderboardIsShowing = false
+  
   var body: some View {
     HStack {
       Button(action: {
@@ -33,7 +35,15 @@ struct TopView: View {
       
       //      RoundedImageViewStroked(systemName: "arrow.counterclockwise")
       Spacer()
-      RoundedImageViewFilled(systemName: "list.dash")
+      Button(action: {
+        leaderboardIsShowing.toggle()
+      },
+             label: {
+        RoundedImageViewFilled(systemName: "list.dash")
+      })
+      .sheet(isPresented: $leaderboardIsShowing, content: {
+        LeaderBoard(leaderboardIsShowing: $leaderboardIsShowing, game: $game)
+      })
     }
   }
 }
@@ -75,17 +85,17 @@ struct RingsView: View {
         .edgesIgnoringSafeArea(.all)
       
       ForEach(1..<6) { ring in
-      let size = CGFloat(ring) * 100
+        let size = CGFloat(ring) * 100
         let opacity = colorScheme == .dark ? 0.1 : 0.3
         Circle()
-//          .strokeBorder(Color("RingsColor"), lineWidth: 20)
+        //          .strokeBorder(Color("RingsColor"), lineWidth: 20)
         
           .stroke(lineWidth: 20)
           .fill(RadialGradient(gradient: Gradient(colors: [ Color("RingsColor").opacity(opacity), Color("RingsColor").opacity(0)]), center: .center, startRadius: 100, endRadius: 300))
           .frame(width: size, height: size)
           .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
       }
-//      RadialGradient(gradient: Gradient(colors: [ Color("RingsColor").opacity(0.32), Color.white.opacity(0)]), center: .center, startRadius: 100, endRadius: 300)
+      //      RadialGradient(gradient: Gradient(colors: [ Color("RingsColor").opacity(0.32), Color.white.opacity(0)]), center: .center, startRadius: 100, endRadius: 300)
       
     }
   }
